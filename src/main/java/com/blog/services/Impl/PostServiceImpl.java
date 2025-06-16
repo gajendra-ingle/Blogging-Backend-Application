@@ -39,10 +39,9 @@ public class PostServiceImpl implements PostService {
 				.orElseThrow(() -> new ResourseNotFoundExceptions("user", "userId", userId));
 
 		Category category = categoryRepositories.findById(catId)
-				.orElseThrow(() -> new ResourseNotFoundExceptions("category", "categoryId", catId));
+				.orElseThrow(() -> new ResourseNotFoundExceptions("Category", "category Id", catId));
 
 		Post post = modelMapper.map(postDto, Post.class);
-		post.setPostImageName("default.png");
 		post.setPostImageName("Default.img");
 		post.setPostAddedData(new Date());
 		post.setUser(user);
@@ -54,12 +53,24 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public PostDTO updatePost(PostDTO postdto, Integer postId) {
-		return null;
+	public PostDTO updatePost(PostDTO postDto, Integer postId) {
+		Post post = postRepositories.findById(postId)
+				.orElseThrow(() -> new ResourseNotFoundExceptions("Post", "post Id", postId));
+
+		post.setPostTitle(postDto.getPostTitle());
+		post.setPostContent(postDto.getPostContent());
+		post.setPostImageName(postDto.getPostImageName());
+
+		Post updatedPost = postRepositories.save(post);
+
+		return modelMapper.map(updatedPost, PostDTO.class);
 	}
 
 	@Override
 	public void deletePost(Integer postId) {
+		Post post = postRepositories.findById(postId)
+				.orElseThrow(() -> new ResourseNotFoundExceptions("Post", "post Id", postId));
+		postRepositories.delete(post);
 	}
 
 	@Override
