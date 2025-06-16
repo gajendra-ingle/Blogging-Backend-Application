@@ -15,8 +15,8 @@ import com.blog.dto.ApiResponse;
 @ControllerAdvice
 public class GlobalExpectionhandler {
 
-	@ExceptionHandler(ResourseNotFoundExceptions.class)
-	public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(ResourseNotFoundExceptions ex) {
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex) {
 
 		String message = ex.getMessage();
 		ApiResponse apiResponse = new ApiResponse(message, false);
