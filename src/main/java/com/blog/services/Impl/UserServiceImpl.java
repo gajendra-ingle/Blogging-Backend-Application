@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.blog.dto.UserDTO;
 import com.blog.entities.User;
-import com.blog.expections.ResourseNotFoundExceptions;
+import com.blog.expections.ResourceNotFoundException;
 import com.blog.repositories.UserRepository;
 import com.blog.services.UserService;
 
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	public UserDTO updateUser(UserDTO userDto, Integer userId) {
 
 		User finduser = userRepository.findById(userId)
-				.orElseThrow(() -> new ResourseNotFoundExceptions("User", " id ", userId));
+				.orElseThrow(() -> new ResourceNotFoundException("User", " id ", userId));
 
 		finduser.setName(userDto.getName());
 		finduser.setEmail(userDto.getEmail());
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO getUserById(Integer userId) {
 		User user = userRepository.findById(userId)
-				.orElseThrow(() -> new ResourseNotFoundExceptions("User", " Id ", userId));
+				.orElseThrow(() -> new ResourceNotFoundException("User", " Id ", userId));
 		return usersToDTO(user);
 	}
 
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deletUser(Integer userId) {
 		User user = userRepository.findById(userId)
-				.orElseThrow(() -> new ResourseNotFoundExceptions("Users", "id", userId));
+				.orElseThrow(() -> new ResourceNotFoundException("Users", "id", userId));
 
 		userRepository.delete(user);
 	}

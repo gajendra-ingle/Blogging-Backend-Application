@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.blog.dto.CategoryDTO;
 import com.blog.entities.Category;
-import com.blog.expections.ResourseNotFoundExceptions;
+import com.blog.expections.ResourceNotFoundException;
 import com.blog.repositories.CategoryRepositories;
 import com.blog.services.CategoryService;
 
@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public CategoryDTO updateCategory(CategoryDTO categoryDTO, Integer categoryId) {
 
 		Category category = categoryRepositories.findById(categoryId)
-				.orElseThrow(() -> new ResourseNotFoundExceptions("category", "category Id", categoryId));
+				.orElseThrow(() -> new ResourceNotFoundException("category", "category Id", categoryId));
 
 		category.setCategoryTitle(categoryDTO.getCategoryTitle());
 		category.setCategoryDiscription(categoryDTO.getCategoryDiscription());
@@ -45,14 +45,14 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryDTO getCategoryById(Integer categoryId) {
 		Category category = categoryRepositories.findById(categoryId)
-				.orElseThrow(() -> new ResourseNotFoundExceptions("category", "categoryId", categoryId));
+				.orElseThrow(() -> new ResourceNotFoundException("category", "categoryId", categoryId));
 		return modelMapper.map(category, CategoryDTO.class);
 	}
 
 	@Override
 	public void deletCategroy(Integer categoryId) {
 		Category category = categoryRepositories.findById(categoryId)
-				.orElseThrow(() -> new ResourseNotFoundExceptions("category", "categoryId", categoryId));
+				.orElseThrow(() -> new ResourceNotFoundException("category", "categoryId", categoryId));
 
 		categoryRepositories.delete(category);
 	}
