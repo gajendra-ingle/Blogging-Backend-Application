@@ -19,6 +19,8 @@ import lombok.Setter;
 @Getter
 public class PostDTO {
 
+	private Integer postId;
+
 	@NotBlank(message = "Post title is required")
 	@Size(min = 5, max = 100, message = "Post title must be between 5 and 100 characters")
 	private String postTitle;
