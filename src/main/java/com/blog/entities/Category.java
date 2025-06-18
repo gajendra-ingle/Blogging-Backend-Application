@@ -30,8 +30,8 @@ public class Category {
 	@Column(name = "titles", length = 100, nullable = false)
 	private String categoryTitle;
 
-	@Column(name = "discription")
-	private String categoryDiscription;
+	@Column(name = "description")
+	private String categoryDescription;
 	
 	@OneToMany(mappedBy = "category" , cascade = CascadeType.ALL)
 	private List<Post> posts = new ArrayList<Post>();
