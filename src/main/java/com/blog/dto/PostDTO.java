@@ -30,14 +30,10 @@ public class PostDTO {
 
 	private String postImageName;
 
-	@NotNull(message = "Post date must be provided")
-	@PastOrPresent(message = "Post date cannot be in the future")
 	private Date postAddedData;
 
-	@NotNull(message = "Category must be provided")
 	private CategoryDTO category;
 
-	@NotNull(message = "User must be provided")
 	private UserDTO user;
 
 	private List<Comment> comment = new ArrayList<>();
