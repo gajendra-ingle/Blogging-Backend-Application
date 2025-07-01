@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.blog.dto.PostDTO;
@@ -49,7 +52,6 @@ public class PostServiceImpl implements PostService {
 		post.setCategory(category);
 
 		Post newPost = postRepositories.save(post);
-
 		return modelMapper.map(newPost, PostDTO.class);
 	}
 
@@ -63,7 +65,6 @@ public class PostServiceImpl implements PostService {
 		post.setPostImageName(postDto.getPostImageName());
 
 		Post updatedPost = postRepositories.save(post);
-
 		return modelMapper.map(updatedPost, PostDTO.class);
 	}
 
@@ -75,11 +76,12 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostDTO> getAllPosts() {
-		List<Post> all = postRepositories.findAll();
+	public List<PostDTO> getAllPosts(Integer pageNumber, Integer pageSize) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		Page<Post> pagePost = postRepositories.findAll(pageable);
+		List<Post> content = pagePost.getContent();
 
-		List<PostDTO> allPosts = all.stream()
-				.map((post) -> modelMapper.map(post, PostDTO.class))
+		List<PostDTO> allPosts = content.stream().map((post) -> modelMapper.map(post, PostDTO.class))
 				.collect(Collectors.toList());
 
 		return allPosts;
@@ -99,8 +101,7 @@ public class PostServiceImpl implements PostService {
 
 		List<Post> posts = postRepositories.findAllByUser(user);
 
-		List<PostDTO> allPosts = posts.stream()
-				.map(post -> modelMapper.map(post, PostDTO.class))
+		List<PostDTO> allPosts = posts.stream().map(post -> modelMapper.map(post, PostDTO.class))
 				.collect(Collectors.toList());
 
 		return allPosts;
@@ -113,8 +114,7 @@ public class PostServiceImpl implements PostService {
 
 		List<Post> posts = postRepositories.findAllByCategory(category);
 
-		List<PostDTO> postsDto = posts.stream()
-				.map((post) -> modelMapper.map(post, PostDTO.class))
+		List<PostDTO> postsDto = posts.stream().map((post) -> modelMapper.map(post, PostDTO.class))
 				.collect(Collectors.toList());
 
 		return postsDto;
