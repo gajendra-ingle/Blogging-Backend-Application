@@ -3,11 +3,12 @@ package com.blog.services;
 import java.util.List;
 
 import com.blog.dto.PostDTO;
+import com.blog.services.Impl.pageNumber;
 
 public interface PostService {
 
 	// create
-	PostDTO createPost(PostDTO postDto , Integer userId , Integer catId);
+	PostDTO createPost(PostDTO postDto, Integer userId, Integer catId);
 
 	// update
 	PostDTO updatePost(PostDTO postdto, Integer postId);
@@ -16,7 +17,7 @@ public interface PostService {
 	void deletePost(Integer postId);
 
 	// get all post
-	List<PostDTO> getAllPosts();
+	List<PostDTO> getAllPosts(Integer pageNumber, Integer pageSize);
 
 	// get single post
 	PostDTO getPostById(Integer postId);
