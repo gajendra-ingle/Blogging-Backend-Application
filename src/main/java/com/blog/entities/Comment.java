@@ -23,6 +23,6 @@ public class Comment {
 	@ManyToOne
 	private Post post;
 
-	@Column(name = "Comment")
+	@Column(name = "comment")
 	private String commentContent;
 }
