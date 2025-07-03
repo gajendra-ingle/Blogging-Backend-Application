@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.blog.dto.PostDTO;
+import com.blog.dto.PostResponse;
 import com.blog.entities.Category;
 import com.blog.entities.Post;
 import com.blog.entities.User;
@@ -76,15 +78,26 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostDTO> getAllPosts(Integer pageNumber, Integer pageSize) {
-		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+	public PostResponse getAllPosts(Integer pageNumber, Integer pageSize, String sortBy, String sortDirection) {
+		Sort sort = Sort.by(sortBy);
+		sort = sortDirection.equalsIgnoreCase("asc") ? sort.ascending() : sort.descending();
+
+		Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
 		Page<Post> pagePost = postRepositories.findAll(pageable);
 		List<Post> content = pagePost.getContent();
 
 		List<PostDTO> allPosts = content.stream().map((post) -> modelMapper.map(post, PostDTO.class))
 				.collect(Collectors.toList());
 
-		return allPosts;
+		PostResponse postResponse = new PostResponse();
+		postResponse.setContent(allPosts);
+		postResponse.setPageNumber(pagePost.getNumber());
+		postResponse.setPageSize(pagePost.getSize());
+		postResponse.setTotalElements(pagePost.getTotalElements());
+		postResponse.setTotalPages(pagePost.getTotalPages());
+		postResponse.setLastPage(pagePost.isLast());
+
+		return postResponse;
 	}
 
 	@Override
@@ -122,7 +135,10 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<PostDTO> searchPosts(String keyword) {
-		return null;
+		List<Post> posts = postRepositories.findByPostTitleContaining(keyword);
+		return posts.stream()
+				.map((post) -> modelMapper.map(post, PostDTO.class))
+				.toList();
 	}
 
 }
