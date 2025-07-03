@@ -15,19 +15,19 @@ import com.blog.dto.CommentDTO;
 import com.blog.services.CommentService;
 
 @RestController
-@RequestMapping("/api/comment")
+@RequestMapping("/api/")
 public class CommentController {
 
 	@Autowired
 	private CommentService commentservice;
 
-	@PostMapping("/{postId}")
+	@PostMapping("/post/{postId}/comments")
 	public ResponseEntity<CommentDTO> createComment(@RequestBody CommentDTO commentdto, @PathVariable Integer postId) {
 		CommentDTO commentdtos = commentservice.createCommect(commentdto, postId);
 		return new ResponseEntity<CommentDTO>(commentdtos, HttpStatus.CREATED);
 	}
 
-	@DeleteMapping("/{commentId}")
+	@DeleteMapping("/comments/{commentId}")
 	public ResponseEntity<ApiResponse> deletComment(@PathVariable Integer commentId) {
 		commentservice.deletComment(commentId);
 		return new ResponseEntity<ApiResponse>(new ApiResponse("User Deleted Successfully", true), HttpStatus.OK);
