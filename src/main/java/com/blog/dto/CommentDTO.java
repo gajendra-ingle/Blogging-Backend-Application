@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class CommentDTO {
 
-	private int commentId;
+	private Integer commentId;
 	private String commentContent;
 }
