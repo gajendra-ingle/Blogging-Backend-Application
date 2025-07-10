@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 import com.blog.dto.CategoryDTO;
 import com.blog.entities.Category;
 import com.blog.expections.ResourceNotFoundException;
-import com.blog.repositories.CategoryRepositories;
+import com.blog.repositories.CategoryRepository;
 import com.blog.services.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
-	private CategoryRepositories categoryRepositories;
+	private CategoryRepository categoryRepositories;
 
 	@Autowired
 	private ModelMapper modelMapper;

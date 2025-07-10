@@ -18,8 +18,8 @@ import com.blog.entities.Category;
 import com.blog.entities.Post;
 import com.blog.entities.User;
 import com.blog.expections.ResourceNotFoundException;
-import com.blog.repositories.CategoryRepositories;
-import com.blog.repositories.PostRepositories;
+import com.blog.repositories.CategoryRepository;
+import com.blog.repositories.PostRepository;
 import com.blog.repositories.UserRepository;
 import com.blog.services.PostService;
 
@@ -27,13 +27,13 @@ import com.blog.services.PostService;
 public class PostServiceImpl implements PostService {
 
 	@Autowired
-	private PostRepositories postRepositories;
+	private PostRepository postRepositories;
 
 	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
-	private CategoryRepositories categoryRepositories;
+	private CategoryRepository categoryRepositories;
 
 	@Autowired
 	private ModelMapper modelMapper;

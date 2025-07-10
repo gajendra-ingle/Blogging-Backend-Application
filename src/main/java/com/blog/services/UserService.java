@@ -15,5 +15,7 @@ public interface UserService {
 	List<UserDTO> getAllUsers();
 
 	void deletUser(Integer userId);
+	
+	UserDTO registerNewUser(UserDTO user);
 
 }

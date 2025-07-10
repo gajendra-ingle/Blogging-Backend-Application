@@ -8,18 +8,18 @@ import com.blog.dto.CommentDTO;
 import com.blog.entities.Comment;
 import com.blog.entities.Post;
 import com.blog.expections.ResourceNotFoundException;
-import com.blog.repositories.CommentRepositories;
-import com.blog.repositories.PostRepositories;
+import com.blog.repositories.CommentRepository;
+import com.blog.repositories.PostRepository;
 import com.blog.services.CommentService;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired
-	private CommentRepositories commentRepositories;
+	private CommentRepository commentRepositories;
 
 	@Autowired
-	private PostRepositories postRepositories;
+	private PostRepository postRepositories;
 
 	@Autowired
 	private ModelMapper modelMapper;

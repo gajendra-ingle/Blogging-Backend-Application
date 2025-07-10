@@ -36,4 +36,11 @@ public class GlobalExpectionhandler {
 
 		return new ResponseEntity<Map<String, String>>(errorResponse, HttpStatus.BAD_REQUEST);
 	}
+
+	// Handle your custom ApiException
+	@ExceptionHandler(ApiException.class)
+	public ResponseEntity<ApiResponse> handleApiException(ApiException ex) {
+		ApiResponse response = new ApiResponse(ex.getMessage(), false);
+		return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED); // 401 for invalid credentials
+	}
 }
