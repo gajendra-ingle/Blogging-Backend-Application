@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -34,7 +33,7 @@ public class SecurityConfig {
 	public static final String[] PUBLIC_URLS = { 
 			"/api/v1/auth/**", 
 			"/api-docs", 
-			"/swagger-resources/**", 
+			"/swagger-resources/**",
 			"/swagger-ui/**", 
 			"/webjars/**"
 
@@ -52,9 +51,9 @@ public class SecurityConfig {
 	// Security Filter Chain
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(auth -> auth.requestMatchers(PUBLIC_URLS).permitAll()
-						.requestMatchers(HttpMethod.GET).permitAll().anyRequest().authenticated())
+		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth.requestMatchers(PUBLIC_URLS).permitAll()
+				// .requestMatchers(HttpMethod.GET).permitAll()
+				.anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authenticationProvider(daoAuthenticationProvider())
@@ -70,6 +69,7 @@ public class SecurityConfig {
 	}
 
 	// Authentication Provider using custom UserDetailsService
+	@SuppressWarnings("deprecation")
 	@Bean
 	public DaoAuthenticationProvider daoAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -78,7 +78,7 @@ public class SecurityConfig {
 		return provider;
 	}
 
-	// Authentication Manager (no longer overridden manually)
+	// Authentication Manager 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 		return configuration.getAuthenticationManager();
