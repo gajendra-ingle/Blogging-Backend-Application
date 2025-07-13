@@ -1,7 +1,6 @@
 package com.blog.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,11 +30,16 @@ import com.blog.security.JwtAuthenticationFilter;
 public class SecurityConfig {
 
 	public static final String[] PUBLIC_URLS = { 
-			"/api/v1/auth/**", 
-			"/api-docs", 
-			"/swagger-resources/**",
-			"/swagger-ui/**", 
-			"/webjars/**"
+			    "/api/v1/auth/**",
+			    "/v2/api-docs",
+			    "/v3/api-docs",
+			    "/v3/api-docs/**",                 
+			    "/swagger-resources",
+			    "/swagger-resources/**",
+			    "/swagger-ui",
+			    "/swagger-ui/**",
+			    "/swagger-ui.html",                
+			    "/webjars/**",
 
 	};
 
@@ -52,7 +56,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth.requestMatchers(PUBLIC_URLS).permitAll()
-				// .requestMatchers(HttpMethod.GET).permitAll()
+				//.requestMatchers(HttpMethod.GET).permitAll()
 				.anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -69,7 +73,6 @@ public class SecurityConfig {
 	}
 
 	// Authentication Provider using custom UserDetailsService
-	@SuppressWarnings("deprecation")
 	@Bean
 	public DaoAuthenticationProvider daoAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -85,8 +88,8 @@ public class SecurityConfig {
 	}
 
 	// CORS Filter Bean (for APIs)
-	@Bean
-	public FilterRegistrationBean<CorsFilter> corsFilter() {
+	@Bean(name = "corsFilter") // Ensure bean name matches what Spring Security expects
+	public CorsFilter corsFilter() {
 		CorsConfiguration cors = new CorsConfiguration();
 		cors.setAllowCredentials(true);
 		cors.addAllowedOriginPattern("*");
@@ -97,9 +100,8 @@ public class SecurityConfig {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", cors);
 
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
-		bean.setOrder(-110); // High priority
-		return bean;
+		return new CorsFilter(source); 
 	}
+
 
 }
