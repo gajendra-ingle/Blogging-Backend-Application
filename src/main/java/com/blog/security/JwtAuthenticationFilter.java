@@ -54,7 +54,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			}
 
 		} else {
-			logger.warn("JWT token does not begin with Bearer");
+			// Check if the request path is in public URLs to avoid logging unnecessary warnings
+			String path = request.getRequestURI();
+			boolean isPublic = false;
+			for (String publicUrl : com.blog.config.SecurityConfig.PUBLIC_URLS) {
+				if (publicUrl.endsWith("/**")) {
+					String prefix = publicUrl.substring(0, publicUrl.length() - 3);
+					if (path.startsWith(prefix)) {
+						isPublic = true;
+						break;
+					}
+				} else {
+					if (path.equals(publicUrl) || path.startsWith(publicUrl)) {
+						isPublic = true;
+						break;
+					}
+				}
+			}
+			if (!isPublic) {
+				logger.warn("JWT token does not begin with Bearer");
+			}
 		}
 
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -77,5 +96,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 		filterChain.doFilter(request, response);
 	}
-
 }
