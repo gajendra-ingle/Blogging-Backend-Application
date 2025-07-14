@@ -1,4 +1,4 @@
-# 📚 Blog Application Documentation 
+# 📚 Blog Application
 
 ### 📖 About the Project
 This is a RESTful backend service built with Spring Boot to manage a blogging platform. It supports user registration, login, role-based access, managing posts, categories, comments, and image uploads. The project includes JWT-based security and provides pagination, sorting, and search capabilities.
@@ -103,6 +103,8 @@ The project uses a MySQL database with the following key entities:
 - **Comment**: Comments linked to posts  
 
 ### 📊 Entity-Relationship (ER) Diagram
+
+![ER Diagram](/ER-Diagram.png)
 
 
 ## 🛠 Future Enhancements
