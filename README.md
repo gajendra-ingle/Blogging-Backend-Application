@@ -1,18 +1,11 @@
 # 📚 Blog Application Documentation 
 
----
-
-## 📖 About the Project
-
+### 📖 About the Project
 This is a RESTful backend service built with Spring Boot to manage a blogging platform. It supports user registration, login, role-based access, managing posts, categories, comments, and image uploads. The project includes JWT-based security and provides pagination, sorting, and search capabilities.
 
----
 
-## 🎯 Objective
-
+### 🎯 Objective
 To build a secure, scalable, and well-structured backend API for a blog system that handles authentication, authorization, content management, and multimedia handling efficiently.
-
----
 
 ## 🛠 Technology Stack
 
@@ -26,9 +19,7 @@ To build a secure, scalable, and well-structured backend API for a blog system t
 - **Development Environment**: Eclipse  
 - **API Testing Tool**: Postman  
 
----
-
-# 🧩 Modules in the Project
+## 🧩 Modules in the Project
 
 - **Authentication**: Handles user registration, login, and JWT-based authentication  
 - **User**: Provides CRUD operations and role assignment for users  
@@ -38,9 +29,8 @@ To build a secure, scalable, and well-structured backend API for a blog system t
 - **Security**: Implements role-based access control and authorization using JWT  
 - **API Documentation**: Offers interactive API exploration via Swagger UI   
 
----
 
-# 🚀 API Endpoints Overview
+## 🚀 API Endpoints Overview
 
 ### 🔐 Authentication
 
@@ -102,7 +92,7 @@ To build a secure, scalable, and well-structured backend API for a blog system t
 | DELETE | /api/notifications/{id}     | Delete a notification by ID         |
 
 
-# 💾 Database
+## 💾 Database
 
 The project uses a MySQL database with the following key entities:
 
@@ -115,9 +105,7 @@ The project uses a MySQL database with the following key entities:
 ### 📊 Entity-Relationship (ER) Diagram
 
 
----
-
-# 🛠 Future Enhancements
+## 🛠 Future Enhancements
 
 - **Notification Module**: Implement real-time user notifications and alerts via email or in-app messages.  
 - **Advanced Image Handling**: Support for image resizing, compression, and CDN integration for faster delivery.  
@@ -129,7 +117,7 @@ The project uses a MySQL database with the following key entities:
 - **Automated Testing**: Add unit and integration tests for improved code quality and reliability.  
 - **Deployment Automation**: Implement CI/CD pipelines for seamless application updates.
 
-# 🙏 Thank You
+## 🙏 Thank You
 
 Thank you for taking the time to explore this Blog Application.  
 Your feedback and contributions are always welcome to help improve this project.  
