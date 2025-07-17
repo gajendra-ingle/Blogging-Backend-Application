@@ -1,8 +1,17 @@
 # 📚 Blog Application
 
 <div align="center">
-  
+
+![Java](https://img.shields.io/badge/Java-JDK%2017-blue)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1.0-brightgreen)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-orange)
+![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-Hibernate-green)
+![MySQL](https://img.shields.io/badge/Database-MySQL-blue)
+![ModelMapper](https://img.shields.io/badge/ModelMapper-DTO%20Mapping-9cf)
+![Maven](https://img.shields.io/badge/Build-Maven-C71A36)
+![Swagger](https://img.shields.io/badge/API-Swagger%20%2F%20OpenAPI-85EA2D)
+![Eclipse](https://img.shields.io/badge/IDE-Eclipse-2C2255)
+![Postman](https://img.shields.io/badge/Tested%20With-Postman-orange)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/gajendra-ingle/Blogging-Backend-Application/blob/main/LICENSE)
 ![Lines of Code](https://tokei.rs/b1/github/gajendra-ingle/Blogging-Backend-Application?category=code)
 ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=gajendra-ingle.Blogging-Backend-Application) 
