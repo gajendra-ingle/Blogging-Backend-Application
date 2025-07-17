@@ -1,5 +1,16 @@
 # 📚 Blog Application
 
+<div align="center">
+  
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1.0-brightgreen)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/gajendra-ingle/Blogging-Backend-Application/blob/main/LICENSE)
+![Lines of Code](https://tokei.rs/b1/github/gajendra-ingle/Blogging-Backend-Application?category=code)
+![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=gajendra-ingle.Blogging-Backend-Application) 
+[![Last Commit](https://img.shields.io/github/last-commit/gajendra-ingle/Blogging-Backend-Application)](https://github.com/gajendra-ingle/Blogging-Backend-Application/commits/main)
+
+</div>
+
+
 ### 📖 About the Project
 This is a RESTful backend service built with Spring Boot to manage a blogging platform. It supports user registration, login, role-based access, managing posts, categories, comments, and image uploads. The project includes JWT-based security and provides pagination, sorting, and search capabilities.
 
